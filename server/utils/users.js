@@ -30,6 +30,14 @@ class Users {
     var userNames = users.map((user) => user.name);
     return userNames;
   }
+
+  isUniqueUserName (name) {
+    var user = this.users.filter((user) => user.name = name)[0];
+    if (user){
+      return false;
+    }
+    return true;
+  };
 }
 
 module.exports = {
