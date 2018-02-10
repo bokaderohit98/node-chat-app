@@ -32,8 +32,8 @@ class Users {
   }
 
   isUniqueUserName (name, room) {
-    var user = this.users.filter((user) => user.name = name)[0];
-    if (user && user.room === room){
+    var user = this.users.filter((user) => user.name === name && user.room === room)[0];
+    if (user){
       return false;
     }
     return true;

@@ -6,7 +6,7 @@ const http = require('http');
 const port = process.env.PORT || 3000;
 const publicPath = path.join(__dirname, '/../public');
 const {generateMessage, generateLocationMessage} = require('./utils/message');
-const {isRealString} = require('./utils/validation');
+const {isRealString, beautifyCredentials} = require('./utils/validation');
 const {Users} = require('./utils/users');
 var app = express();
 var server = http.createServer((app));
@@ -20,10 +20,12 @@ io.on('connection', (socket) => {
 
   socket.on('join', (params, callback) => {
     if (!isRealString(params.name) || !isRealString(params.room)) {
-      return callback('Username and Room name are require');
+      return callback('Username and Room name are required');
     }
 
-    if (!users.isUniqueUserName(params.name)) {
+    params.room = params.room.toLowerCase();
+
+    if (!users.isUniqueUserName(params.name, params.room)) {
       return callback('Username already exist.')
     }
 

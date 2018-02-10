@@ -10,6 +10,7 @@ function scrollToBottom () {
   var scrollHeight = messages.prop('scrollHeight');
   var newMessageHeight = newMessage.innerHeight();
   var lastMessageHeight = newMessage.prev().innerHeight();
+
   if (scrollTop + clientHeight + newMessageHeight + lastMessageHeight >= scrollHeight) {
     messages.scrollTop(scrollHeight);
   }
@@ -17,14 +18,10 @@ function scrollToBottom () {
 
 socket.on('connect', function () {
   var params = jQuery.deparam(window.location.search);
-  params.name = params.name[0].toUpperCase() + params.name.substr(1).toLowerCase();
-  params.room = params.room.toLowerCase();
   socket.emit('join', params, function (err) {
     if (err) {
       alert(err);
       window.location.href = '/';
-    } else {
-      console.log('No err');
     }
   });
 });
