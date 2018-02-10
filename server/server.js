@@ -34,6 +34,11 @@ io.on('connection', (socket) => {
     users.removeUser(socket.id);
     users.addUser(socket.id, params.name, params.room);
 
+    if (users.getRoomList().filter((room) => room === params.room).length === 1) {
+      console.log('Adding room to the list');
+      io.emit('updateRoomList', users.getRoomList());
+    }
+
     io.to(params.room).emit('updateUserList', users.getUserList(params.room));
 
     socket.emit('newMessage', generateMessage('Admin', 'Welcome to the Chat App'));
@@ -59,12 +64,20 @@ io.on('connection', (socket) => {
     }
   });
 
+  socket.on('loginConnected', () => {
+    io.emit('updateRoomList', users.getRoomList());
+  });
+
   socket.on('disconnect', () => {
     console.log('User disconnected');
     var user = users.removeUser(socket.id);
     if (user) {
       io.to(user.room).emit('updateUserList', users.getUserList(user.room));
       io.to(user.room).emit('newMessage', generateMessage('Admin', `${user.name} has left`));
+      if (users.getUserList(user.room).length === 0) {
+        io.emit('updateRoomList', users.getRoomList());
+        console.log('Removing room from the list');
+      }
     }
   });
 });
