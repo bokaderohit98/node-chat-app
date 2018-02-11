@@ -5,16 +5,17 @@ socket.on('connect', function () {
 });
 
 socket.on('updateRoomList', function (rooms) {
-  var ol = jQuery('<ol></ol>').attr('id', 'room_list');
-
-  var counter = 0;
+  var ul = jQuery('<ul></ul>').addClass('room_list');
   rooms.forEach(function (room) {
-    ol.append(jQuery('<li></li>').text(room));
+    ul.append(jQuery('<li></li>').text(room));
   });
-  jQuery('#rooms').html(ol);
+  jQuery('#rooms').html(ul);
 });
 
-jQuery('#room_list li').click(function () {
+jQuery('.room_list li').on('click', function () {
   console.log('list clicked');
-  jQuery('#room_name').val(jQuery(this).text());
+  jQuery('[name=room]').val(jQuery(this).text());
 });
+
+jQuery('.sidebar-toggle-button').on('click', showSidebar);
+jQuery('.chat__sidebar').on('click', hideSidebar);

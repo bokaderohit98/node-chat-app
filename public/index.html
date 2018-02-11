@@ -4,14 +4,14 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
     <title>Join  | ChatApp</title>
-    <script src="/js/libs/jquery-3.3.1.js"></script>
-    <script src="/socket.io/socket.io.js"></script>
-    <script src="/js/index.js"></script>
     <link rel="stylesheet" href="/css/styles.css">
   </head>
   <body class="chat">
+    <div class="sidebar-toggle-button">
+      <img src="/img/open-white.png">
+    </div>
     <div class="chat__sidebar">
-      <h3>Active Rooms</h3>
+      <h4>Active Rooms</h4>
       <div id="rooms"></div>
     </div>
     <div class="chat_main centered-form">
@@ -22,11 +22,11 @@
             </div>
             <div class="form-field">
               <label>Display Name</label>
-              <input id="user_name" type="text" name="name" autofocus>
+              <input type="text" name="name" autofocus>
             </div>
             <div class="form-field">
               <label>Room name</label>
-              <input id="room_name" type="text" name="room">
+              <input type="text" name="room">
             </div>
             <div class="form-field">
               <button>Join</button>
@@ -34,5 +34,9 @@
           </form>
         </div>
     </div>
+    <script src="/js/libs/jquery-3.3.1.js"></script>
+    <script src="/socket.io/socket.io.js"></script>
+    <script src="/js/functions.js"></script>
+    <script src="/js/index.js"></script>
   </body>
 </html>

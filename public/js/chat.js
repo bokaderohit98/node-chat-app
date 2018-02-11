@@ -31,13 +31,11 @@ socket.on('disconnect', function () {
 });
 
 socket.on('updateUserList', function (users) {
-  var ol = jQuery('<ol></ol>');
-
+  var ul = jQuery('<ul></ul>').addClass('user_list');
   users.forEach(function (user) {
-    ol.append(jQuery('<li></li>').text(user));
+    ul.append(jQuery('<li></li>').text(user));
   });
-
-  jQuery('#users').html(ol);
+  jQuery('#users').html(ul);
 });
 
 
@@ -74,7 +72,7 @@ jQuery('#message-form').on('submit', function (e) {
     from: 'User',
     text: messageTextbox.val(),
   }, function () {
-    messageTextbox.val("");
+    messageTextbox.val('');
   });
 });
 
@@ -98,3 +96,11 @@ locationButton.on('click', function () {
     alert('Unable to fetch location');
   });
 });
+
+jQuery('.user_list li').on('click', function () {
+  console.log('list clicked');
+  jQuery('[name=message]').val('@' + jQuery(this).text());
+});
+
+jQuery('.sidebar-toggle-button').on('click', showSidebar);
+jQuery('.chat__sidebar').on('click', hideSidebar);
