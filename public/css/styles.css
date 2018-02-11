@@ -108,13 +108,13 @@ button:disabled {
 .chat__sidebar h4 {
   color:#e6eaee;
   margin:10px 20px;
-  text-align:left
+  text-align:left;
 }
 
 .chat__sidebar li {
   background: #ffffff;
   border:1px solid #e1e1e1;
-  border-radius:5px;
+  border-radius:18px;
   margin:10px
 }
 
@@ -157,16 +157,33 @@ button:disabled {
   flex-grow:1
 }
 
+.message_container {
+  display: flex;
+}
+
 .message {
   padding: 5px 20px 5px 20px;
   border-radius: 20px;
   background: #eee;
   margin-bottom: 20px;
+  display: flex;
+  flex-direction: column;
+}
+
+.message_placeholder {
+  display: flex;
+  flex: 1;
 }
 
 .message__title {
+  width: auto;
   display: flex;
   margin-bottom:5px
+}
+
+.message__body {
+  width: auto;
+  display: flex;
 }
 
 .message__title h4{

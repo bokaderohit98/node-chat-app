@@ -40,25 +40,29 @@ socket.on('updateUserList', function (users) {
 
 
 socket.on('newMessage', function (message) {
+  console.log('My id: ', socket.id);
+  console.log('senders id: ', message.id);
   var formattedTime = moment(message.createdAt).format('h:mm a');
-  var template = jQuery('#message-template').html();
-  var html = Mustache.render(template, {
-    text: message.text,
-    from: message.from,
-    createdAt: formattedTime
-  });
+
+  if (socket.id === message.id) {
+  }
+
+  var html = renderMessage(message, formattedTime, socket.id);
+
   jQuery('#messages').append(html);
   scrollToBottom();
 });
 
 socket.on('newLocationMessage', function (locationMessage) {
-  var formattedTime = moment(locationMessage.createdAt).format('h:mm a');
-  var template = jQuery('#location-message-template').html();
-  var html = Mustache.render(template, {
-    url: locationMessage.url,
-    from: locationMessage.from,
-    createdAt: formattedTime
-  });
+  console.log('My id: ', socket.id);
+  console.log('senders id: ', message.id);
+  var formattedTime = moment(message.createdAt).format('h:mm a');
+
+  if (socket.id === message.id) {
+  }
+
+  var html = renderLocationMessage(locationMessage, formattedTime, socket.id);
+
   jQuery('#messages').append(html);
   scrollToBottom();
 });
@@ -98,7 +102,6 @@ locationButton.on('click', function () {
 });
 
 jQuery('.user_list li').on('click', function () {
-  console.log('list clicked');
   jQuery('[name=message]').val('@' + jQuery(this).text());
 });
 
