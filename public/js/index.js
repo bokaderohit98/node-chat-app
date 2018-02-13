@@ -10,11 +10,7 @@ socket.on('updateRoomList', function (rooms) {
     ul.append(jQuery('<li></li>').text(room));
   });
   jQuery('#rooms').html(ul);
-});
-
-jQuery('.room_list li').on('click', function () {
-  console.log('list clicked');
-  jQuery('[name=room]').val(jQuery(this).text());
+  jQuery('.room_list li').on('click', inflateRoom);
 });
 
 jQuery('.sidebar-toggle-button').on('click', showSidebar);

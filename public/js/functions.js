@@ -10,6 +10,14 @@ function showSidebar () {
   jQuery('.sidebar-toggle-button').hide();
 };
 
+function inflateMessage () {
+ jQuery('[name=message]').val('@' + jQuery(this).text());
+};
+
+function inflateRoom () {
+  jQuery('[name=room]').val(jQuery(this).text());
+};
+
 function shiftRight (senderId, receiverId) {
   if (senderId === receiverId) {
     return {
@@ -21,7 +29,7 @@ function shiftRight (senderId, receiverId) {
       tag: '',
       color: '#eeeeee',
   };
-}
+};
 
 function renderMessage (message, formattedTime, id) {
   var attr = shiftRight(message.id, id);

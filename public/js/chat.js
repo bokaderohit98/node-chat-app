@@ -36,12 +36,11 @@ socket.on('updateUserList', function (users) {
     ul.append(jQuery('<li></li>').text(user));
   });
   jQuery('#users').html(ul);
+  jQuery('.user_list li').on('click', inflateMessage);
 });
 
 
 socket.on('newMessage', function (message) {
-  console.log('My id: ', socket.id);
-  console.log('senders id: ', message.id);
   var formattedTime = moment(message.createdAt).format('h:mm a');
 
   if (socket.id === message.id) {
@@ -54,8 +53,6 @@ socket.on('newMessage', function (message) {
 });
 
 socket.on('newLocationMessage', function (locationMessage) {
-  console.log('My id: ', socket.id);
-  console.log('senders id: ', message.id);
   var formattedTime = moment(message.createdAt).format('h:mm a');
 
   if (socket.id === message.id) {
@@ -99,10 +96,6 @@ locationButton.on('click', function () {
     locationButton.removeAttr('disabled').text('Send Location');
     alert('Unable to fetch location');
   });
-});
-
-jQuery('.user_list li').on('click', function () {
-  jQuery('[name=message]').val('@' + jQuery(this).text());
 });
 
 jQuery('.sidebar-toggle-button').on('click', showSidebar);
