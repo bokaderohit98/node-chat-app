@@ -1,12 +1,12 @@
 function hideSidebar () {
   if (jQuery(window).width() <= 600) {
-    jQuery('.chat__sidebar').css('transform', 'translateX(-100%)');
+    jQuery('.chat__sidebar').hide();
     jQuery('.sidebar-toggle-button').show();
   }
 };
 
 function showSidebar () {
-  jQuery('.chat__sidebar').css('transform', 'translateX(0)');
+  jQuery('.chat__sidebar').show();
   jQuery('.sidebar-toggle-button').hide();
 };
 
