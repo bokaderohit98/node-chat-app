@@ -35,6 +35,10 @@ class Users {
     return this.users.map((user) => user.room);
   }
 
+  getUniqueRoomList () {
+    return [... new Set (this.getRoomList())];
+  }
+
   isUniqueUserName (name, room) {
     var user = this.users.filter((user) => user.name === name && user.room === room)[0];
     if (user){

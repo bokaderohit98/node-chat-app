@@ -65,7 +65,7 @@ io.on('connection', (socket) => {
   });
 
   socket.on('loginConnected', () => {
-    io.emit('updateRoomList', users.getRoomList());
+    io.emit('updateRoomList', users.getUniqueRoomList());
   });
 
   socket.on('disconnect', () => {
@@ -75,7 +75,7 @@ io.on('connection', (socket) => {
       io.to(user.room).emit('updateUserList', users.getUserList(user.room));
       io.to(user.room).emit('newMessage', generateMessage('Admin', `${user.name} has left`));
       if (users.getUserList(user.room).length === 0) {
-        io.emit('updateRoomList', users.getRoomList());
+        io.emit('updateRoomList', users.getUniqueRoomList());
         console.log('Removing room from the list');
       }
     }
